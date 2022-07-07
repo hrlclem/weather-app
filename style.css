@@ -1,0 +1,17 @@
+* {
+    margin:0;
+    padding:0;
+    word-break:break-all;
+    font-family: 'Lato', sans-serif;
+}
+
+.footer {
+    font-family: arial;
+    color: #212121;
+    font-size: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+  }
