@@ -1,61 +1,153 @@
-let city, country, date, timezone, time, temp, weatherState, humidity, windSpeed, sunrise, sunset;
+let city, country;
+let temp, weatherState, humidity, windSpeed;
+let date, time, dayOfWeek;
+let sunrise, sunset, sunriseHour, sunriseMin, sunsetHour, sunsetMin;
 let measureUnit = "metric";
 
 async function apiFetch(){
     // city = document.getElementById("cityField").value;
-    city = "tokyo";
-    try{
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${measureUnit}&APPID=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
-        const dataCity = await response.json();
+    city = "Tokyo";
+
+    try {
+        // Get Weather data on city
+        const responseWeather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${measureUnit}&APPID=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
+        const dataCity = await responseWeather.json();
 
         city =          dataCity.name;
         country =       dataCity.sys.country;
-        sunrise =       dataCity.sys.sunrise;
-        sunset =        dataCity.sys.sunset;
-        timezone =      dataCity.timezone;
-        time =          dataCity.dt;
-        date =          new Date(time * 1000);
+        lat =           dataCity.coord.lat;
+        lon =           dataCity.coord.lon;
         tempC =         dataCity.main.temp;
+        tempF =         convertCtoF(tempC);
         weatherState =  dataCity.weather[0].main;
         humidity =      dataCity.main.humidity;
         windSpeed =     dataCity.wind.speed;
 
-        console.log("city: " + city);
-        console.log("country: " + country);
-        console.log(" ");
-        console.log("timezone: " + timezone);
+
+        // Get time data on city
+        const responseTime = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=hrlclem`, {mode: 'cors'});
+        const dataTime = await responseTime.json();
+
+        date =          dataTime.time;
+        sunrise =       formatTime(dataTime.sunrise);
+        sunset =        formatTime(dataTime.sunset);
+        date =          formatDate(dataTime.time);
+        time =          formatTime(dataTime.time)
+
         console.log("date: " + date);
         console.log("time: " + time);
-        console.log(" ");
-
-        console.log("tempF: " + tempC +"°C");
-        console.log("weatherState: " + weatherState);
-        console.log("humidity: " + humidity + "%");
-        console.log("windSpeed: " + windSpeed + "km/h");
         console.log("sunrise: " + sunrise);
         console.log("sunset: " + sunset);
+        console.log("tempC: " + tempC);
+        console.log("tempF: " + tempF);
+
     } catch(error){
         console.log("Couldn't fetch data!")
     }
 };
 
 apiFetch();
-// calcTime(timezone); 
 
-// function calcTime(offset) {
-//     // create Date object for current location
-//     let d = new Date();
+function formatDate(date) {
+    let year =  date.slice(2,4);
+    let month = date.slice(5,7);
+    // Get month name
+        if (month == '01') {
+            month = 'January';
+        } else if (month == '02') {
+            month = 'February';
+        } else if (month == '03') {
+            month = 'March';
+        } else if (month == '04') {
+            month = 'April';
+        } else if (month == '05') {
+            month = 'May';
+        } else if (month == '06') {
+            dayOfWeek = 'June';
+        } else if (month == '07') {
+            month = 'July';
+        } else if (month == '08') {
+            month = 'August';
+        } else if (month == '09') {
+            month = 'September';
+        } else if (month == '10') {
+            dayOfWeek = 'October';
+        } else if (month == '11') {
+            month = 'November';
+        } else if (month == '12') {
+            month = 'December';
+        };
 
-//     let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    // Get day suffix
+    let day = date.slice(8,10);
+        let suffixDay;
+        if (day.slice(-1) == '1') {
+            suffixDay = 'st';
+        } else if (day.slice(-1) == '2') {
+            suffixDay = 'nd';
+        } else if (day.slice(-1) == '3') {
+            suffixDay = 'rd';
+        } else {
+            suffixDay = 'th';
+        }
+        if (day > 3 && day < 21) {
+            suffix = 'th';
+        }
+        if (day < 10) {
+            day = day.slice(1);
+        };
 
-//     // create new Date object for different city
-//     // using supplied offset
-//     let nd = new Date(utc + (3600000 * offset));
+    // Get day name
+    dayOfWeek =     new Date().getDay();
+    if (dayOfWeek == '1') {
+        dayOfWeek = 'Monday';
+      } else if (dayOfWeek == '2') {
+        dayOfWeek = 'Tuesday';
+      } else if (dayOfWeek == '3') {
+        dayOfWeek = 'Wednesday';
+      } else if (dayOfWeek == '4') {
+        dayOfWeek = 'Thursday';
+      } else if (dayOfWeek == '5') {
+        dayOfWeek = 'Friday';
+      } else if (dayOfWeek == '6') {
+        dayOfWeek = 'Saturday';
+      } else if (dayOfWeek == '7') {
+        dayOfWeek = 'Sunday';
+      };
 
-//     // return time as a string
-//     console.log("TIME:" + nd);
-// }
+    return `${dayOfWeek}, ${day}${suffixDay} ${month} '${year}`
+}
 
-// Function to get time
-// Function to get date
-// Function to get temperature C and F
+function formatTime(time){
+    let hour =   time.slice(11,13);
+    let minute = time.slice(14,16);
+
+    let suffixTime;
+
+    // Get time suffix
+    if (hour > 11) {
+        suffixTime = 'pm';
+      } else {
+        suffixTime = 'am';
+      }
+
+    // Change time to AM-PM
+    if (hour > 12) {
+        hour -= 12;
+    }
+
+    if (hour < 10 && suffixTime === 'am') {
+        hour = hour.slice(1, 2);
+    }
+
+    // Midngith set
+    if (hour === '0') {
+        hour = 12;
+    }
+
+    return `${hour}:${minute} ${suffixTime}`
+}
+
+function convertCtoF(temp){
+    return (temp * 1.8) + 32;
+}
