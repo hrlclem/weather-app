@@ -15,7 +15,6 @@ window.onkeypress = function(event) {
          checkInput();
          apiFetch()
              .then(showDOM());
-         console.log(weatherObj);
          return;
      }
  return;
@@ -25,6 +24,7 @@ window.onkeypress = function(event) {
     checkInput();
     apiFetch()
         .then(showDOM());
-    console.log(weatherObj);
+        showDOM();
+
     return;
 });

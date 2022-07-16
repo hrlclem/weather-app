@@ -93,10 +93,8 @@ function locationOutput(city, country){
 
 function checkInput(){
     let submitValue = document.getElementById("cityField").value;
-    if (submitValue != "Tokyo"){
-        weatherObj.city = submitValue;
-        return weatherObj.city;
-    }
+    weatherObj.city = submitValue;
+    return weatherObj.city;
 }
 
 function formatDate(date) {

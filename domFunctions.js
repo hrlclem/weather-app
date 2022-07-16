@@ -22,6 +22,7 @@ function weatherDisplay(){
         tempCText.innerHTML =   weatherObj.tempC;
         todayIcon.src =         weatherIcon(weatherObj.weatherState);
 
+// ISSUE HHEEEEEEEEEEERe
     // // rightPanel
     // const title1 =  document.querySelector('.title1');
     // const temp1 =   document.querySelector('.temp1');
