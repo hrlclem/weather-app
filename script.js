@@ -1,22 +1,19 @@
 import { apiFetch, checkInput } from "./apiFunctions.js";
-import { backgroundImg, showDOM } from "./domFunctions.js";
+import { showDOM } from "./domFunctions.js";
 import { weatherObj } from "./apiFunctions.js";
+
+const submitBtn = document.querySelector(".submitBtn");
+
 
 const loadPage = (() => {
     apiFetch()
         .then(showDOM());
+    console.log("loadPage: " + weatherObj);
 })();
-
-
-// By default run apiFetch + Dom
-
-
-
-const submitBtn = document.querySelector(".submitBtn");
 
 submitBtn.addEventListener("click", function(){
     checkInput();
     apiFetch()
         .then(showDOM());
-    // Process dom functions
+    console.log("Click: " + weatherObj);
 });
