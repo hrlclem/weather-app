@@ -40,9 +40,16 @@ body{
 }
     #cityField{
         width:40%;
-        border-radius: 6px;
         padding: 6px;
-        padding-left: 14px;
+        background: transparent;
+
+        outline: 0;
+        border-width: 0 0 1px;
+        border-color: white;
+        color: white;
+    }
+    #cityField::placeholder{
+        color: white;
     }
 
 .leftPanel{
