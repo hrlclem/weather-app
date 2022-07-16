@@ -1,76 +1,72 @@
-let city = "Tokyo", country;
-let lat, lon;
-let tempC, tempMinC, tempF, tempMinF, weatherState, humidity, windSpeed;
-let date, time, dayOfWeek;
-let sunrise, sunset;
+let city = "Tokyo";
+let tempC, tempMinC;
+let dayOfWeek;
 let measureUnit = "metric";
-let tempPlusOne, tempPlusTwo, tempPlusThree, tempPlusFour, tempPlusFive, tempPlusSix, tempPlusSeven;
-let weatherPlusOne, weatherPlusTwo, weatherPlusThree, weatherPlusFour, weatherPlusFive, weatherPlusSix, weatherPlusSeven;
+const weatherObj = {};
 
+import { showDOM } from "./domFunctions.js";
 
 async function apiFetch(){
     try {
         // Get Weather data on city
         const responseWeather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${measureUnit}&APPID=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
         const dataCity = await responseWeather.json();
-
-        city =          dataCity.name;
-        country =       dataCity.sys.country;
-        lat =           dataCity.coord.lat;
-        lon =           dataCity.coord.lon;
-        tempC =         dataCity.main.temp;
-        tempMinC =      dataCity.main.temp_min;
-        tempF =         convertCtoF(tempC);
-        tempMinF =      convertCtoF(tempMinC);
-        weatherState =  checkWeatherState(dataCity.weather[0].id);
-        humidity =      dataCity.main.humidity;
-        windSpeed =     dataCity.wind.speed;
-        // weatherState="Few clouds";
-
+ 
+            weatherObj.city =          dataCity.name;
+            weatherObj.country =       dataCity.sys.country;
+            weatherObj.lat =           dataCity.coord.lat;
+            weatherObj.lon =           dataCity.coord.lon;
+            weatherObj.tempC =         dataCity.main.temp;
+            weatherObj.tempMinC =      dataCity.main.temp_min;
+            weatherObj.tempF =         convertCtoF(tempC);
+            weatherObj.tempMinF =      convertCtoF(tempMinC);
+            weatherObj.weatherState =  checkWeatherState(dataCity.weather[0].id);
+            weatherObj.humidity =      dataCity.main.humidity;
+            weatherObj.windSpeed =     dataCity.wind.speed;
+            weatherObj.plusOne =        [];
+            weatherObj.plusTwo =        [];
+            weatherObj.plusThree =      [];
+            weatherObj.plusFour =       [];
+            weatherObj.plusFive =       [];
+            weatherObj.plusSix =        [];
+            weatherObj.plusSeven =      [];
 
         // Get Weather for the week
-        const responseWeekWeather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${measureUnit}&appid=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
+        const responseWeekWeather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${weatherObj.lat}&lon=${weatherObj.lon}&units=${measureUnit}&appid=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
         const dataWeek = await responseWeekWeather.json();
 
-        tempPlusOne =       dataWeek.daily[0].temp.eve;
-        weatherPlusOne =    checkWeatherState(dataWeek.daily[0].weather[0].id);
-        tempPlusTwo =       dataWeek.daily[1].temp.eve;
-        weatherPlusTwo =    checkWeatherState(dataWeek.daily[1].weather[0].id);
-        tempPlusThree =     dataWeek.daily[2].temp.eve;
-        weatherPlusThree =  checkWeatherState(dataWeek.daily[2].weather[0].id);
-        tempPlusFour =      dataWeek.daily[3].temp.eve;
-        weatherPlusFour =   checkWeatherState(dataWeek.daily[3].weather[0].id);
-        tempPlusFive =      dataWeek.daily[4].temp.eve;
-        weatherPlusFive =   checkWeatherState(dataWeek.daily[4].weather[0].id);
-        tempPlusSix =       dataWeek.daily[5].temp.eve;
-        weatherPlusSix =    checkWeatherState(dataWeek.daily[5].weather[0].id);
-        tempPlusSeven =     dataWeek.daily[6].temp.eve;
-        weatherPlusSeven =  checkWeatherState(dataWeek.daily[6].weather[0].id);
-
+            weatherObj.plusOne[0] =     dataWeek.daily[0].temp.eve;
+            weatherObj.plusOne[1] =     checkWeatherState(dataWeek.daily[0].weather[0].id);
+            weatherObj.plusTwo[0] =     dataWeek.daily[1].temp.eve;
+            weatherObj.plusTwo[1] =     checkWeatherState(dataWeek.daily[1].weather[0].id);
+            weatherObj.plusThree[0] =   dataWeek.daily[2].temp.eve;
+            weatherObj.plusThree[1] =   checkWeatherState(dataWeek.daily[2].weather[0].id);      
+            weatherObj.plusFour[0] =    dataWeek.daily[3].temp.eve;
+            weatherObj.plusFour[1] =    checkWeatherState(dataWeek.daily[3].weather[0].id);
+            weatherObj.plusFive[0] =    dataWeek.daily[4].temp.eve;
+            weatherObj.plusFive[1] =    checkWeatherState(dataWeek.daily[4].weather[0].id);
+            weatherObj.plusSix[0] =     dataWeek.daily[5].temp.eve;
+            weatherObj.plusSix[1] =     checkWeatherState(dataWeek.daily[5].weather[0].id);
+            weatherObj.plusSeven[0] =   dataWeek.daily[6].temp.eve;
+            weatherObj.plusSeven[1] =   checkWeatherState(dataWeek.daily[6].weather[0].id);
 
         // Get time data on city
-        const responseTime = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=hrlclem`, {mode: 'cors'});
+        const responseTime = await fetch(`http://api.geonames.org/timezoneJSON?lat=${weatherObj.lat}&lng=${weatherObj.lon}&username=hrlclem`, {mode: 'cors'});
         const dataTime = await responseTime.json();
 
-        sunrise =       formatTime(dataTime.sunrise);
-        sunset =        formatTime(dataTime.sunset);
-        date =          formatDate(dataTime.time);
-        time =          formatTime(dataTime.time)
+            weatherObj.sunrise =       formatTime(dataTime.sunrise);
+            weatherObj.sunset =        formatTime(dataTime.sunset);
+            weatherObj.date =          formatDate(dataTime.time);
+            weatherObj.time =          formatTime(dataTime.time);
 
-        console.log("All good data!")
 
+        showDOM();
+        console.log("All good data!");
 
     } catch(error){
         console.log("Couldn't fetch data!")
     }
 };
-
-
-// Export variables and functions
-export {apiFetch, checkInput};
-export {city, tempC, tempF, weatherState, humidity, windSpeed, date, time, dayOfWeek, sunrise, sunset, measureUnit};
-export {tempPlusOne, tempPlusTwo, tempPlusThree, tempPlusFour, tempPlusFive, tempPlusSix, tempPlusSeven};
-export {weatherPlusOne, weatherPlusTwo, weatherPlusThree, weatherPlusFour, weatherPlusFive, weatherPlusSix, weatherPlusSeven};
 
 
 
@@ -79,7 +75,10 @@ export {weatherPlusOne, weatherPlusTwo, weatherPlusThree, weatherPlusFour, weath
 function checkInput(){
     let submitValue = document.getElementById("cityField").value;
     if (submitValue != "Tokyo"){
-        city = submitValue;
+        weatherObj.city = submitValue;
+        console.log(1 + weatherObj.city)        
+        console.log(2 + submitValue)
+        return weatherObj.city;
     }
 }
 
@@ -98,7 +97,7 @@ function formatDate(date) {
         } else if (month == '05') {
             month = 'May';
         } else if (month == '06') {
-            dayOfWeek = 'June';
+            month = 'June';
         } else if (month == '07') {
             month = 'July';
         } else if (month == '08') {
@@ -106,7 +105,7 @@ function formatDate(date) {
         } else if (month == '09') {
             month = 'September';
         } else if (month == '10') {
-            dayOfWeek = 'October';
+            month = 'October';
         } else if (month == '11') {
             month = 'November';
         } else {
@@ -211,3 +210,9 @@ function checkWeatherState(weatherId){
         return "Pending";
     }
 };
+
+
+
+// Export variables and functions
+export {apiFetch, checkInput};
+export {weatherObj};
