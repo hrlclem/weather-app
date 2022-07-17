@@ -1,13 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700&display=swap');
+
 * {
     margin:0;
     padding:0;
-    word-break: break-all;
-    font-family: 'Lato', sans-serif;
+    word-break:keep-all;
+    font-family: 'Manrope', sans-serif;
+    color:white;
 }
 
 .footer {
     font-family: arial;
-    color: #212121;
+    color: #a5a3a3;
     font-size: 10px;
     position: fixed;
     bottom: 0;
@@ -18,7 +21,7 @@
 
 body{
     display: grid;
-    grid-template-columns: 18% auto 18%;
+    grid-template-columns: 30% auto 30%;
     grid-template-rows: 8% auto 15%;
     margin:0;
     background-size: cover;
@@ -26,6 +29,10 @@ body{
     object-fit: cover;
     background-repeat: no-repeat;
     background-position: center; 
+}
+
+.icon{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(17deg) brightness(104%) contrast(102%);
 }
 
 .topPanel{
@@ -37,11 +44,11 @@ body{
 
     justify-content: center;
     align-items: center;
+    margin-top: 14px;
 }
     .searchIcon{
         padding-right: 8px;
-        width:30px;
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(17deg) brightness(104%) contrast(102%);
+        width:25px;
     }
     #cityField{
         width:40%;
@@ -66,16 +73,125 @@ body{
     grid-row-start: 2;
     grid-row-end: 3;
     margin-left: 16%;
+    margin-top: 30px;
 }
+    .weatherState{
+        font-weight: 500;
+        font-size: 30px;
+    }
+    .city{
+        margin-top: -6px;
+        margin-bottom: 10px;
+    }
+    .date, .time{
+        font-size: 12px;
+    }
+    .tempDegree, .tempF{
+        margin-top: 10px;
+        font-size: 40px;
+        font-weight: 700;
+    }
+    .todayIcon{
+        width: 90px;
+        margin-top: 10px;
+    }
+
+    /* Toggle switch */
+    .toggleSwitch{
+        margin-top: 10px;
+    }
+    .chooseC, .chooseF{
+        display:inline-block;
+        font-weight: 300;
+        font-size: 18px;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 54px;
+        height: 28px;
+        margin:6px;
+    }
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2196F3;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    input:checked + .slider {
+        background-color: #ccc;
+    }
+    input:focus + .slider {
+        box-shadow: 0 0 1px #ccc;
+    }
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 20px;
+    }
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
 
 .rightPanel{
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-    margin-right: 16%;
-
+    margin-right: 10%;
+    margin-top: 30px;
 }
+    .dailyPanel{
+        float: right;
+        margin-right: 16%;
+    }
+    .dayDiv{
+        display:flex;
+        margin-bottom: 25px;
+    }
+    .iconDayDiv{
+        width: 50px;
+        height: 50px;
+    }
+    .textDayDiv{
+        margin-left: 16px;
+    }
+    .titleDayDiv{
+        font-weight: 400;
+        font-size: 0.8rem;
+    }
+    .tempDayDiv{
+        font-weight: 600;
+        font-size: 1.2rem;   
+        margin-top: -2px;
+    }
 
 .bottomPanel{
     display: inline-flex;
@@ -86,4 +202,25 @@ body{
     grid-row-end: 4;
     padding-left: 16%;
     padding-right: 16%;
+    align-items: center;
 }
+    .settingDiv{
+        display:flex;
+    }
+    .iconSettings{
+        width: 50px;
+        height: 50px;
+    }
+    .textSetting{
+        padding-left: 12px;
+        padding-top: 4px;
+
+        font-weight: 400;
+        font-size: 0.8rem;
+    }
+    .textValue{
+        margin-top: -4px;
+        font-weight: 800;
+        font-size: 1.2rem;
+    }
+

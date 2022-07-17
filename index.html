@@ -10,64 +10,83 @@
 <body>
 
     <div class="topPanel">
-        <img class="searchIcon" src="./src/icon/search.svg">
+        <img class="searchIcon icon" src="./src/icon/search.svg">
         <input id="cityField" placeholder="Search location...">
     </div>
 
 
     <div class="leftPanel">
-        <button class="CtoF">CtoF</button>
         <div class="weatherState"></div>
         <div class="city"></div>
         <div class="date"></div>
         <div class="time"></div>
-        <div class="tempC"></div>
-        <img class="todayIcon">
+        <div class="tempDegree"></div>
+        <img class="todayIcon icon">
+        <div class="toggleSwitch">
+            <div class="chooseC">°C</div>
+            <label class="switch">                
+                <input id="toggleswitch" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <div class="chooseF">°F</div>
+        </div>
+        <!-- <button class="CtoF">CtoF</button> -->
     </div>
 
 
     <div class="rightPanel">
-        <div class="dayHourBtnDiv">
-            <button class="dailyBtn">Daily</button>
-            <!-- <button class="hourlyBtn">Hourly</button> -->
-        </div>
 
         <div class="dayHourDiv">
             <div class="dailyPanel">
-                <div class="day1Div">
-                    <div class="title1"></div>
-                    <div class="temp1"></div>
-                    <img class="icon1">
+
+                <div class="day1Div dayDiv">
+                    <img class="icon1 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title1 titleDayDiv"></div>
+                        <div class="temp1 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day2Div">
-                    <div class="title2"></div>
-                    <div class="temp2"></div>
-                    <img class="icon2">
+                <div class="day2Div dayDiv">
+                    <img class="icon2 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title2 titleDayDiv"></div>
+                        <div class="temp2 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day3Div">
-                    <div class="title3"></div>
-                    <div class="temp3"></div>
-                    <img class="icon3">
+                <div class="day3Div dayDiv">
+                    <img class="icon3 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title3 titleDayDiv"></div>
+                        <div class="temp3 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day4Div">
-                    <div class="title4"></div>
-                    <div class="temp4"></div>
-                    <img class="icon4">
+                <div class="day4Div dayDiv">
+                    <img class="icon4 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title4 titleDayDiv"></div>
+                        <div class="temp4 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day5Div">
-                    <div class="title5"></div>
-                    <div class="temp5"></div>
-                    <img class="icon5">
+                <div class="day5Div dayDiv">
+                    <img class="icon5 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title5 titleDayDiv"></div>
+                        <div class="temp5 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day6Div">
-                    <div class="title6"></div>
-                    <div class="temp6"></div>
-                    <img class="icon6">
+                <div class="day6Div dayDiv">
+                    <img class="icon6 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title6 titleDayDiv"></div>
+                        <div class="temp6 tempDayDiv"></div>
+                    </div>
                 </div>
-                <div class="day7Div">
-                    <div class="title7"></div>
-                    <div class="temp7"></div>
-                    <img class="icon7">
+                <div class="day7Div dayDiv">
+                    <img class="icon7 icon iconDayDiv">
+                    <div class="textDayDiv">
+                        <div class="title7 titleDayDiv"></div>
+                        <div class="temp7 tempDayDiv"></div>
+                    </div>
                 </div>
             </div>
             <!-- <div class="hourlyPanel">
@@ -78,30 +97,40 @@
 
 
     <div class="bottomPanel">
-        <div class="humidityDiv">
-            <img class="humidityIcon" src="./src/icon/humidity.svg">
-            <div class="humidityTitle">Humidity</div>
-            <div class="humidityValue"></div>
+        <div class="humidityDiv settingDiv">
+            <img class="humidityIcon icon iconSettings" src="./src/icon/humidity.svg">
+            <div class="textSetting">
+                <div class="humidityTitle">Humidity</div>
+                <div class="humidityValue textValue"></div>
+            </div>
         </div>
-        <div class="rainDiv">
-            <img class="rainIcon" src="./src/icon/rain.svg">
-            <div class="rainTitle">Chance of rain</div>
-            <div class="rainValue"></div>
+        <div class="rainDiv settingDiv">
+            <img class="rainIcon icon iconSettings" src="./src/icon/rain.svg">
+            <div class="textSetting">
+                <div class="rainTitle">Chance of rain</div>
+                <div class="rainValue textValue"></div>
+            </div>
         </div>
-        <div class="windDiv">
-            <img class="windIcon" src="./src/icon/wind.svg">
-            <div class="windTitle">Wind speed</div>
-            <div class="windValue"></div>
+        <div class="windDiv settingDiv">
+            <img class="windIcon icon iconSettings" src="./src/icon/wind.svg">
+            <div class="textSetting">
+                <div class="windTitle">Wind speed</div>
+                <div class="windValue textValue"></div>
+            </div>
         </div>
-        <div class="sunriseDiv">
-            <img class="sunriseIcon" src="./src/icon/sunrise.svg">
-            <div class="sunriseTitle">Sunrise</div>
-            <div class="sunriseValue"></div>
+        <div class="sunriseDiv settingDiv">
+            <img class="sunriseIcon icon iconSettings" src="./src/icon/sunrise.svg">
+            <div class="textSetting">
+                <div class="sunriseTitle">Sunrise</div>
+                <div class="sunriseValue textValue"></div>
+            </div>
         </div>
-        <div class="sunsetDiv">
-            <img class="sunsetIcon" src="./src/icon/sunset.svg">
-            <div class="sunsetTitle">Sunset</div>
-            <div class="sunsetValue"></div>
+        <div class="sunsetDiv settingDiv">
+            <img class="sunsetIcon icon iconSettings" src="./src/icon/sunset.svg">
+            <div class="textSetting">
+                <div class="sunsetTitle">Sunset</div>
+                <div class="sunsetValue textValue"></div>
+            </div>
         </div>
     </div>
 

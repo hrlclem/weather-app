@@ -1,30 +1,32 @@
-import { apiFetch, checkInput } from "./apiFunctions.js";
-import { showDOM } from "./domFunctions.js";
-import { weatherObj } from "./apiFunctions.js";
+import { apiFetch, checkInput, weatherObj } from "./apiFunctions.js";
+import { showDOM, changeCtoF } from "./domFunctions.js";
 
 const searchIcon = document.querySelector(".searchIcon");
 
 const loadPage = (() => {
-    apiFetch()
-        .then(showDOM());
+    apiFetch();
+    showDOM();
+    changeCtoF();
     return;
 })();
 
+
+// On "Enter" press
 window.onkeypress = function(event) {
     if (event.keyCode == 13) {
          checkInput();
-         apiFetch()
-             .then(showDOM());
+         apiFetch();
+         showDOM();
+         console.log(weatherObj);
          return;
      }
  return;
  };
 
- searchIcon.addEventListener("click", function(){
+// On button click
+searchIcon.addEventListener("click", function(){
     checkInput();
-    apiFetch()
-        .then(showDOM());
-        showDOM();
-
+    apiFetch();
+    showDOM();
     return;
 });

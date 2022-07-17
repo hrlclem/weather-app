@@ -1,4 +1,3 @@
-let temp, tempC, tempMinC;
 let dayOfWeek;
 let measureUnit = "metric";
 
@@ -18,10 +17,8 @@ async function apiFetch(){
             weatherObj.location =      locationOutput(weatherObj.city, weatherObj.country);
             weatherObj.lat =           dataCity.coord.lat;
             weatherObj.lon =           dataCity.coord.lon;
-            weatherObj.tempC =         dataCity.main.temp + "°C";
-            weatherObj.tempMinC =      dataCity.main.temp_min + "°C";
-            weatherObj.tempF =         convertCtoF(tempC) + "°F";
-            weatherObj.tempMinF =      convertCtoF(tempMinC) + "°F";
+            weatherObj.tempC =         dataCity.main.temp.toFixed(1);
+            weatherObj.tempF =         convertCtoF(weatherObj.tempC).toFixed(1);
             weatherObj.weatherState =  checkWeatherState(dataCity.weather[0].id);
             weatherObj.humidity =      dataCity.main.humidity + "%";
             weatherObj.windSpeed =     dataCity.wind.speed + " km/h";
@@ -37,31 +34,31 @@ async function apiFetch(){
         const responseWeekWeather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${weatherObj.lat}&lon=${weatherObj.lon}&units=${measureUnit}&appid=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
         const dataWeek = await responseWeekWeather.json();
 
-            weatherObj.plusOne[0] =     dataWeek.daily[0].temp.eve + " °C";
+            weatherObj.plusOne[0] =     dataWeek.daily[0].temp.eve;
             weatherObj.plusOne[1] =     checkWeatherState(dataWeek.daily[0].weather[0].id);
             weatherObj.plusOne[2] =     nextDate(1);
 
-            weatherObj.plusTwo[0] =     dataWeek.daily[1].temp.eve + " °C";
+            weatherObj.plusTwo[0] =     dataWeek.daily[1].temp.eve;
             weatherObj.plusTwo[1] =     checkWeatherState(dataWeek.daily[1].weather[0].id);
             weatherObj.plusTwo[2] =     nextDate(2);
 
-            weatherObj.plusThree[0] =   dataWeek.daily[2].temp.eve + " °C";
+            weatherObj.plusThree[0] =   dataWeek.daily[2].temp.eve;
             weatherObj.plusThree[1] =   checkWeatherState(dataWeek.daily[2].weather[0].id);  
             weatherObj.plusThree[2] =   nextDate(3);
             
-            weatherObj.plusFour[0] =    dataWeek.daily[3].temp.eve + " °C";
+            weatherObj.plusFour[0] =    dataWeek.daily[3].temp.eve;
             weatherObj.plusFour[1] =    checkWeatherState(dataWeek.daily[3].weather[0].id);
             weatherObj.plusFour[2] =    nextDate(4);
 
-            weatherObj.plusFive[0] =    dataWeek.daily[4].temp.eve + " °C";
+            weatherObj.plusFive[0] =    dataWeek.daily[4].temp.eve;
             weatherObj.plusFive[1] =    checkWeatherState(dataWeek.daily[4].weather[0].id);
             weatherObj.plusFive[2] =    nextDate(5);
 
-            weatherObj.plusSix[0] =     dataWeek.daily[5].temp.eve + " °C";
+            weatherObj.plusSix[0] =     dataWeek.daily[5].temp.eve;
             weatherObj.plusSix[1] =     checkWeatherState(dataWeek.daily[5].weather[0].id);
             weatherObj.plusSix[2] =    nextDate(6);
 
-            weatherObj.plusSeven[0] =   dataWeek.daily[6].temp.eve + " °C";
+            weatherObj.plusSeven[0] =   dataWeek.daily[6].temp.eve;
             weatherObj.plusSeven[1] =   checkWeatherState(dataWeek.daily[6].weather[0].id);
             weatherObj.plusSeven[2] =   nextDate(7);
 
@@ -227,7 +224,6 @@ function formatTime(time){
 };
 
 
-
 function convertCtoF(temp){
     return (temp * 1.8) + 32;
 }
@@ -243,7 +239,7 @@ function checkWeatherState(weatherId){
         return "Mist";
     } else if (weatherId == 800){
         return "Clear";
-    } else if (800 == weatherId || 802 == weatherId){
+    } else if (801 == weatherId || 802 == weatherId){
         return "Few clouds"
     } else if (803 == weatherId || 804 == weatherId){
         return "Broken clouds"
@@ -255,5 +251,5 @@ function checkWeatherState(weatherId){
 
 
 // Export variables and functions
-export {apiFetch, checkInput};
+export {apiFetch, checkInput, convertCtoF};
 export {weatherObj};
