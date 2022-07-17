@@ -1,8 +1,6 @@
 let dayOfWeek;
 let measureUnit = "metric";
-
 const weatherObj = {city : "Tokyo"};
-
 
 import { showDOM } from "./domFunctions.js";
 

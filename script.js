@@ -7,18 +7,17 @@ const loadPage = (() => {
     apiFetch();
     showDOM();
     changeCtoF();
+
     return;
 })();
-
 
 // On "Enter" press
 window.onkeypress = function(event) {
     if (event.keyCode == 13) {
-         checkInput();
-         apiFetch();
-         showDOM();
-         console.log(weatherObj);
-         return;
+        checkInput();
+        apiFetch();
+        showDOM();
+        return;
      }
  return;
  };
