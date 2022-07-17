@@ -7,7 +7,7 @@ import { showDOM } from "./domFunctions.js";
 async function apiFetch(){
     try {
         // Get Weather data on city
-        const responseWeather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${weatherObj.city}&units=${measureUnit}&APPID=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
+        const responseWeather = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weatherObj.city}&units=${measureUnit}&APPID=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
         const dataCity = await responseWeather.json();
  
             weatherObj.city =          dataCity.name;
