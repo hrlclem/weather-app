@@ -61,14 +61,20 @@ async function apiFetch(){
             weatherObj.plusSeven[2] =   nextDate(7);
 
 
-        // Get time data on city
-        const responseTime = await fetch(`http://api.geonames.org/timezoneJSON?lat=${weatherObj.lat}&lng=${weatherObj.lon}&username=hrlclem`, {mode: 'cors'});
+        // Get time data on city        
+        const responseTime = await fetch(`https://timezone.abstractapi.com/v1/current_time/?api_key=1eb5cb427b64474d845b7b10dbce6187&location=${weatherObj.city}`, {mode: 'cors'});
         const dataTime = await responseTime.json();
 
-            weatherObj.sunrise =       formatTime(dataTime.sunrise);
-            weatherObj.sunset =        formatTime(dataTime.sunset);
-            weatherObj.date =          formatDate(dataTime.time);
-            weatherObj.time =          formatTime(dataTime.time);
+            weatherObj.date =          formatDate(dataTime.datetime);
+            weatherObj.time =          formatTime(dataTime.datetime);
+
+            
+        // Get sunrise/sunset data on city        
+        const responseSun = await fetch(`https://api.ipgeolocation.io/astronomy?apiKey=5b94f0e8e1954916bbc3cd0ad54d5e16&location=${weatherObj.city}`, {mode: 'cors'});
+        const sunTime = await responseSun.json();
+
+            weatherObj.sunrise =         sunTime.sunrise + " AM";
+            weatherObj.sunset =          sunTime.sunset + " PM";;
         
 
         showDOM();
