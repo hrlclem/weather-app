@@ -72,6 +72,10 @@ async function apiFetch(){
         
 
         showDOM();
+
+        // Hide loader
+        document.querySelector(".loader-wrapper").style.display = "none";
+
         console.log("All good data!");
 
     } catch(error){
