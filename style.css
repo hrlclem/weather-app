@@ -78,22 +78,23 @@ body{
 }
     .weatherState{
         font-weight: 500;
-        font-size: 30px;
+        font-size: 2rem;
     }
     .city{
         margin-top: -6px;
         margin-bottom: 10px;
+        font-size: 1rem;
     }
     .date, .time{
-        font-size: 12px;
+        font-size: 0.8rem;
     }
     .tempDegree, .tempF{
         margin-top: 10px;
-        font-size: 40px;
+        font-size: 3rem;
         font-weight: 700;
     }
     .todayIcon{
-        width: 90px;
+        width: 30%;
         margin-top: 10px;
     }
 
