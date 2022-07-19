@@ -20,13 +20,13 @@ async function apiFetch(){
             weatherObj.weatherState =  checkWeatherState(dataCity.weather[0].id);
             weatherObj.humidity =      dataCity.main.humidity + "%";
             weatherObj.windSpeed =     dataCity.wind.speed + " km/h";
-            weatherObj.plusOne =        [];
-            weatherObj.plusTwo =        [];
-            weatherObj.plusThree =      [];
-            weatherObj.plusFour =       [];
-            weatherObj.plusFive =       [];
-            weatherObj.plusSix =        [];
-            weatherObj.plusSeven =      [];
+            weatherObj.plusOne =       [];
+            weatherObj.plusTwo =       [];
+            weatherObj.plusThree =     [];
+            weatherObj.plusFour =      [];
+            weatherObj.plusFive =      [];
+            weatherObj.plusSix =       [];
+            weatherObj.plusSeven =     [];
 
         // Get Weather for the week
         const responseWeekWeather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${weatherObj.lat}&lon=${weatherObj.lon}&units=${measureUnit}&appid=2960c833ed296c43d70fe42ddaf23cea`, {mode: 'cors'});
@@ -58,7 +58,7 @@ async function apiFetch(){
 
             weatherObj.plusSeven[0] =   dataWeek.daily[6].temp.eve;
             weatherObj.plusSeven[1] =   checkWeatherState(dataWeek.daily[6].weather[0].id);
-            weatherObj.plusSeven[2] =   nextDate(7);
+            weatherObj.plusSeven[2] =   nextDate(0);
 
 
         // Get time data on city        
@@ -76,16 +76,17 @@ async function apiFetch(){
             weatherObj.sunrise =         sunTime.sunrise + " AM";
             weatherObj.sunset =          sunTime.sunset + " PM";;
         
-
         showDOM();
 
         // Hide loader
         document.querySelector(".loader-wrapper").style.display = "none";
 
         console.log("All good data!");
-
+        return;
     } catch(error){
         console.log("Couldn't fetch data!")
+        return;
+
     }
 };
 
