@@ -99,8 +99,12 @@ function locationOutput(city, country){
 
 function checkInput(){
     let submitValue = document.getElementById("cityField").value;
-    weatherObj.city = submitValue;
-    return weatherObj.city;
+    if (submitValue == "" || submitValue == " "){
+        alert("Please input a city first!")
+    } else{
+        weatherObj.city = submitValue;
+        return weatherObj.city;
+    }
 }
 
 function formatDate(date) {
